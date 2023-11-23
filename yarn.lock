@@ -973,22 +973,22 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@devcycle/js-client-sdk@^1.15.1":
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/@devcycle/js-client-sdk/-/js-client-sdk-1.15.1.tgz#b34463b6fb7665bfe9cb50268d7a7c76e676105b"
-  integrity sha512-Q6SLKcQaiKDqhtcAlKq5a82+loJddJsxlWausefqf3upvvD+4/2qQFAb77xRdo20bVJdVRNst8DqjShgmVzPbQ==
+"@devcycle/js-client-sdk@^1.16.0":
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@devcycle/js-client-sdk/-/js-client-sdk-1.16.0.tgz#89220a93e522a700a9958bb2fabec2b520cbb465"
+  integrity sha512-mtjPVd8pIs5VhGOYAO3Q2mizbQJ5Q5P72eChW3JysuFMXoSpgh9waN3/+CpsjenNLxwL5l9cuonw3muZFreH/A==
   dependencies:
-    "@devcycle/types" "^1.3.0"
+    "@devcycle/types" "^1.4.0"
     axios "^1.0.0"
     axios-retry "^3.3.1"
     lodash "^4.17.21"
     ua-parser-js "^1.0.36"
     uuid "^8.3.2"
 
-"@devcycle/types@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@devcycle/types/-/types-1.3.0.tgz#2fe8a39ab6a43559d12eb00bd632d551fe2d465e"
-  integrity sha512-kKNgTbTpWGT4ROncJUsw16YCSk3TTy5MhcPKVDe7EgIHK3JfVibL5ETouAqsj467/xQs235W/TGJ5uryi7kRVw==
+"@devcycle/types@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@devcycle/types/-/types-1.4.0.tgz#08d953794bd5a7ed035556c4c8f57b9b608a7a19"
+  integrity sha512-4b3sqn7UFAV1/LsU42TZCzLUpKDChW39CE1PgCaLonM944ho/ILwk3FHehk287PugIMm7mZLW2N1/QG0wukK9w==
   dependencies:
     "@nestjs/class-validator" "^0.13.4"
     class-transformer "0.5.1"
