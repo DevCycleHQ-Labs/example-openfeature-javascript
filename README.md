@@ -3,22 +3,11 @@
 An example app built using the [DevCycle JavaScript SDK](https://docs.devcycle.com/sdk/client-side-sdks/javascript/)
 
 ## Creating a Demo Feature
-This example app is designed to have 3 different experiences: one for `user-1`, one for `user-2`, and the default experience for all other users. This requires that your project has a feature with the expected variables, as well as some simple targeting rules. To set up that feature:
+This example app requires that your project has a feature with the expected variables, as well as some simple targeting rules. 
 
-* [Create a new Release feature](https://docs.devcycle.com/introduction/quickstart#2-create-a-feature) on the DevCycle dashboard and add the following variables:
-   * A string variable with the key `togglebot-greeting`
-        * Set this to a different greeting message for each of your variations.
-   * A boolean variable with the key `togglebot-wink`
-        * Set this to `true` in one variation and `false` in the other.
-   * A string variable with the key `togglebot-speed`
-        * Set this to `fast` in one variation, and `off` in the other
-* Create the following [targeting rules](https://docs.devcycle.com/essentials/targeting) in your Development environment:
-    * A rule targeting the user with `User ID` `is` `user-1` 
-        * Target this user with your first variation
-    * A rule targeting the user with `User ID` `is` `user-2`
-        *  Target this user with the other variation
+#### ⇨ [Click here](https://app.devcycle.com/r/create?resource=feature&key=hello-togglebot) to automatically create the feature in your project ⇦
 
-Now when you run the example app and switch your identity between these users, you'll be able to see the different variations.
+When you run the example app and switch your identity between users, you'll be able to see the feature's different variations.
 
 
 ## Running the example
