@@ -11,17 +11,17 @@ When you run the example app and switch your identity between users, you'll be a
 
 
 ## Running the example
-* Run `yarn install` in the project directory to install dependencies
+* Run `npm install` in the project directory to install dependencies
 * Create a `.env` file and set `DEVCYCLE_CLIENT_SDK_KEY` to the SDK Key for your environment.\
 You can find this under [Settings > Environments](https://app.devcycle.com/r/environments) on the DevCycle dashboard.
-* Run `yarn build` to build the project
+* Run `npm run build` to build the project
 * Open `index.html` to view it in your browser.
 
 To experiment with targeting, update the user objects in `src/users.js` based on your targeting rules.
 
-Re-run `yarn build` and refresh after making changes.
+Re-run `npm run build` and refresh after making changes.
 
 ## Running the tests
 
-* Run `yarn test` to run the tests
+* Run `npm run test` to run the tests
 * See `src/devcycle.test.js` for examples of mocking the DevCycle SDK.
