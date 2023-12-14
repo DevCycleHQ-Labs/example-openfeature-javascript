@@ -9,11 +9,15 @@ This example app requires that your project has a feature with the expected vari
 
 When you run the example app and switch your identity between users, you'll be able to see the feature's different variations.
 
+## Running the Example
+### Setup
 
-## Running the example
 * Run `npm install` in the project directory to install dependencies
 * Create a `.env` file and set `DEVCYCLE_CLIENT_SDK_KEY` to the SDK Key for your environment.\
 You can find this under [Settings > Environments](https://app.devcycle.com/r/environments) on the DevCycle dashboard.
+
+### Development
+
 * Run `npm run build` to build the project
 * Open `index.html` to view it in your browser.
 
@@ -21,7 +25,8 @@ To experiment with targeting, update the user objects in `src/users.js` based on
 
 Re-run `npm run build` and refresh after making changes.
 
-## Running the tests
+### Testing
 
-* Run `npm run test` to run the tests
-* See `src/devcycle.test.js` for examples of mocking the DevCycle SDK.
+`npm run test`
+
+See `src/devcycle.test.js` for examples of mocking the DevCycle SDK.
