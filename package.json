@@ -13,7 +13,7 @@
   "dependencies": {
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
-    "@devcycle/js-client-sdk": "^1.16.1",
+    "@devcycle/js-client-sdk": "^1.16.2",
     "babel-loader": "^9.1.3",
     "dotenv-webpack": "^8.0.1",
     "webpack": "^5.89.0"
