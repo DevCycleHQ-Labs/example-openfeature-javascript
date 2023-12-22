@@ -55,7 +55,7 @@ const updateUI = (devcycleClient) => {
     
     document.getElementById("greeting").innerHTML = greeting;
     const togglebot = document.getElementById("togglebot");
-    togglebot.src = shouldWink ? "./images//togglebot-wink.png" : "./images/togglebot.png";
+    togglebot.src = shouldWink ? "./images/togglebot-wink.png" : "./images/togglebot.png";
 
     togglebot.classList.remove("spin-slow", "spin-fast", "spin-super-fast", "spin-off");
     togglebot.classList.add(`spin-${spinSpeed}`);
