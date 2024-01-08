@@ -23,7 +23,7 @@ jest.mock('@devcycle/js-client-sdk', () => ({
     initializeDevCycle: () => mockDevCycleClient
 }));
 
-const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
+const html = fs.readFileSync(path.resolve(__dirname, '../public/index.html'), 'utf8');
 
 beforeEach(() => {
     jest.clearAllMocks();

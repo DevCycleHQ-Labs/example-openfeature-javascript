@@ -18,12 +18,12 @@ You can find this under [Settings > Environments](https://app.devcycle.com/r/env
 
 ### Development
 
-* Run `npm run build` to build the project
-* Open `index.html` to view it in your browser.
+`npm run start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 To experiment with targeting, update the user objects in `src/users.js` based on your targeting rules.
-
-Re-run `npm run build` and refresh after making changes.
 
 ### Testing
 
