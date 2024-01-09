@@ -8,24 +8,25 @@
   </head>
 
   <body class="App">
-    <img src="/images/togglebot.png" class="App-logo" alt="togglebot" id="togglebot" />
-
-    <div class="App-user">
-      <h1 id="greeting">Loading...</h1>
-      <select id="identify" class="App-button"></select>
-      <button id="reset" class="App-button">Reset User</button>
+    <div class="App-logo">
+      <p>Demo Application</p>
+      <img src="/images/devcycle-togglebot-full-colour.svg" alt="logo" id="logo" />
     </div>
 
-    <div>
-      <p>Edit <code>src/devcycle.js</code> and save to see changes</p>
-      <a
-        class="App-link"
-        href="https://docs.devcycle.com/sdk/client-side-sdks/javascript/"
-        target="_blank"
-      >
-        DevCycle SDK Docs
-      </a>
+    <div class="togglebot-content">
+      <div id="togglebot-message" class="togglebot-message"></div>
+      <img src="/images/togglebot.png" class="togglebot" alt="togglebot" id="togglebot" />
+
+      <div class="variation-details">
+        <p>Serving Variation: </p> <p id="variation-name" style="font-weight: bold"></p>
+      </div>
+
     </div>
+    <div class="instructions">
+      <h3 id="instructions-header"></h3>
+      <p id="instructions-body"></p>
+    </div>
+  </div>
 
     <script src="dist/main.js"></script>
 </body>

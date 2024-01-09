@@ -1,5 +1,6 @@
 import { initializeDevCycle } from "@devcycle/js-client-sdk";
 import { users } from "./users";
+import { updateUI } from "./updateUI";
 
 // Create DevCycle client and set up event listeners
 export const setUpDevCycle = () => {
@@ -15,12 +16,6 @@ export const setUpDevCycle = () => {
         devcycleOptions
     );
 
-    setUpIdentifyDropdown(devcycleClient);
-    document.getElementById("reset").onclick = () => {
-        devcycleClient.resetUser().then(() => updateUI(devcycleClient));
-        document.getElementById("identify").options[3].selected = true;
-    };
-
     // Update the app when DevCycle receives the first user config
     devcycleClient.onClientInitialized().then(({ config }) => {
         updateUI(devcycleClient);
@@ -30,33 +25,11 @@ export const setUpDevCycle = () => {
     devcycleClient.subscribe('configUpdated', () => {
         updateUI(devcycleClient);
     });
-}
-
-const setUpIdentifyDropdown = (devcycleClient) => {
-    const identifyDropdown = document.getElementById("identify");
-
-    identifyDropdown.innerHTML = `
-        ${users.map(user => (
-         `<option key='${user.user_id}' value='${JSON.stringify(user)}'>${user.name}</option>`
-        ))}
-        <option key="anonymous" value='{}'>Anonymous User</option>
-    `
-
-    identifyDropdown.onchange = (event) => {
-        devcycleClient.identifyUser(JSON.parse(event.target.value)).then(() => updateUI(devcycleClient));
-    }
-}
-
-// Use DevCycle variables to control the UI 
-const updateUI = (devcycleClient) => {
-    const greeting = devcycleClient.variableValue('togglebot-greeting', 'Hello world!')
-    const shouldWink = devcycleClient.variableValue('togglebot-wink', false)
-    const spinSpeed = devcycleClient.variableValue('togglebot-speed', 'off')
-    
-    document.getElementById("greeting").innerHTML = greeting;
-    const togglebot = document.getElementById("togglebot");
-    togglebot.src = shouldWink ? "./images/togglebot-wink.png" : "./images/togglebot.png";
-
-    togglebot.classList.remove("spin-slow", "spin-fast", "spin-super-fast", "spin-off");
-    togglebot.classList.add(`spin-${spinSpeed}`);
 };
+
+// You can use this function to change which user is identified. The new user will receive a different config, 
+// depending on the user properties and your feature's targeting rules
+const identifyNewUser = (devcycleClient) => {
+    devcycleClient.identifyUser(users[1]).then(() => updateUI(devcycleClient));
+}
+
