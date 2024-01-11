@@ -39,6 +39,13 @@ describe('DevCycle client initialization', () => {
         setUpDevCycle();
         await waitFor(() => expect(mockDevCycleClient.onClientInitialized).toHaveBeenCalled());
     });
+
+    test('App handles default variation', async () => {
+        setUpDevCycle();
+        await waitFor(() => {
+            expect(document.getElementById('variation-name')).toHaveTextContent('Default');
+        });
+    })
 })
 
 describe('Togglebot speed', () => {
@@ -52,6 +59,7 @@ describe('Togglebot speed', () => {
         setUpDevCycle();
         await waitFor(() => {
             expect(document.getElementById('togglebot-message')).toHaveTextContent("Hello! Nice to meet you.");
+            expect(document.getElementById('instructions-header')).toHaveTextContent('Welcome to DevCycle\'s example app');
         });
     })
 
@@ -60,6 +68,7 @@ describe('Togglebot speed', () => {
         setUpDevCycle();
         await waitFor(() => {
             expect(document.getElementById('togglebot-message')).toHaveTextContent("Awesome, look at you go!");
+            expect(document.getElementById('instructions-header')).toHaveTextContent('Great! You\'ve taken the first step in exploring DevCycle.');
         });
     })
 
@@ -68,6 +77,7 @@ describe('Togglebot speed', () => {
         setUpDevCycle();
         await waitFor(() => {
             expect(document.getElementById('togglebot-message')).toHaveTextContent("This is fun!");
+            expect(document.getElementById('instructions-header')).toHaveTextContent('You\'re getting the hang of things.');
         });
     })
 
@@ -75,7 +85,8 @@ describe('Togglebot speed', () => {
         mockVariableValue('togglebot-speed', 'off-axis');
         setUpDevCycle();
         await waitFor(() => {
-            expect(document.getElementById('togglebot-message')).toHaveTextContent("...I’m gonna be sick...");
+            expect(document.getElementById('togglebot-message')).toHaveTextContent("...I'm gonna be sick...");
+            expect(document.getElementById('instructions-header')).toHaveTextContent('You\'re getting the hang of things.');
         });
     })
 
@@ -85,66 +96,8 @@ describe('Togglebot speed', () => {
         setUpDevCycle();
         await waitFor(() => {
             expect(document.getElementById('togglebot-message')).toHaveTextContent("What the unicorn?");
+            expect(document.getElementById('instructions-header')).toHaveTextContent('You\'re getting the hang of things.');
         });
     })
-})
-
-describe('App instructions', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-        document.documentElement.innerHTML = html.toString();
-    });
-
-    test('App handles default variation', async () => {
-        setUpDevCycle();
-        await waitFor(() => {
-            expect(document.getElementById('variation-name')).toHaveTextContent('Default');
-            expect(document.getElementById('instructions-header')).toHaveTextContent('Welcome to DevCycle\'s example app');
-        });
-    })
-
-    test('App handles base variation', async () => {
-        mockAllFeatures.mockImplementation(() => ({
-            'hello-togglebot': {
-                variationKey: 'variation-base',
-                variationName: 'Base',
-            }
-        }));
-        setUpDevCycle();
-        await waitFor(() => {
-            expect(document.getElementById('variation-name')).toHaveTextContent('Base');
-            expect(document.getElementById('instructions-header')).toHaveTextContent('Welcome to DevCycle\'s example app');
-        });
-    })
-
-    test('App handles wink variation', async () => {
-        mockAllFeatures.mockImplementation(() => ({
-            'hello-togglebot': {
-                variationKey: 'variation-wink',
-                variationName: 'Wink',
-            }
-        }));
-        setUpDevCycle();
-        await waitFor(() => {
-            expect(document.getElementById('variation-name')).toHaveTextContent('Wink');
-            expect(document.getElementById('instructions-header')).toHaveTextContent('Great! You\'ve taken the first step in exploring DevCycle.');
-        });
-    })
-
-
-    test('App handles custom variation', async () => {
-        mockAllFeatures.mockImplementation(() => ({
-            'hello-togglebot': {
-                variationKey: 'variation-custom',
-                variationName: 'Custom',
-            }
-        }));
-        setUpDevCycle();
-        await waitFor(() => {
-            expect(document.getElementById('variation-name')).toHaveTextContent('Custom');
-            expect(document.getElementById('instructions-header')).toHaveTextContent('You\’re getting the hang of things.');
-        });
-    })
-
 })
 
