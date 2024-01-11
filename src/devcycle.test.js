@@ -1,9 +1,8 @@
-import { fireEvent, waitFor } from '@testing-library/dom';
+import { waitFor } from '@testing-library/dom';
 import fs from 'fs';
 import path from 'path';
 import '@testing-library/jest-dom';
 import { setUpDevCycle } from './devcycle.js';
-import { users } from './users.js';
 
 process.env.DEVCYCLE_CLIENT_SDK_KEY = 'mocked-sdk-key';
 
@@ -48,55 +47,38 @@ describe('DevCycle client initialization', () => {
     })
 })
 
-describe('Togglebot speed', () => {
+describe('App content', () => {
     beforeEach(() => {
         jest.clearAllMocks();
         document.documentElement.innerHTML = html.toString();
     });
 
-    test('Togglebot handles speed "off"', async () => {
-        mockVariableValue('togglebot-speed', 'off');
+    test.each([
+        ['off', 'Hello! Nice to meet you.'],
+        ['slow', 'Awesome, look at you go!'],
+        ['fast', 'This is fun!'],
+        ['off-axis', "...I'm gonna be sick..."],
+        ['surprise', "What the unicorn?"],
+    ])('Togglebot message is updated for speed "%s"', async (speed, expectedMessage) => {
+        mockVariableValue('togglebot-speed', speed);
         setUpDevCycle();
         await waitFor(() => {
-            expect(document.getElementById('togglebot-message')).toHaveTextContent("Hello! Nice to meet you.");
-            expect(document.getElementById('instructions-header')).toHaveTextContent('Welcome to DevCycle\'s example app');
+            expect(document.getElementById('togglebot-message')).toHaveTextContent(expectedMessage);
         });
     })
 
-    test('Togglebot handles speed "slow"', async () => {
-        mockVariableValue('togglebot-speed', 'slow');
+    test.each([
+        'default',
+        'step-1',
+        'step-2',
+        'step-3',
+    ])('App description is updated for value "%s"', async (exampleText) => {
+        mockVariableValue('example-text', exampleText);
         setUpDevCycle();
+        await new Promise((resolve) => setTimeout(resolve, 100));
         await waitFor(() => {
-            expect(document.getElementById('togglebot-message')).toHaveTextContent("Awesome, look at you go!");
-            expect(document.getElementById('instructions-header')).toHaveTextContent('Great! You\'ve taken the first step in exploring DevCycle.');
-        });
-    })
-
-    test('Togglebot handles speed "fast"', async () => {
-        mockVariableValue('togglebot-speed', 'fast');
-        setUpDevCycle();
-        await waitFor(() => {
-            expect(document.getElementById('togglebot-message')).toHaveTextContent("This is fun!");
-            expect(document.getElementById('instructions-header')).toHaveTextContent('You\'re getting the hang of things.');
-        });
-    })
-
-    test('Togglebot handles speed "off-axis"', async () => {
-        mockVariableValue('togglebot-speed', 'off-axis');
-        setUpDevCycle();
-        await waitFor(() => {
-            expect(document.getElementById('togglebot-message')).toHaveTextContent("...I'm gonna be sick...");
-            expect(document.getElementById('instructions-header')).toHaveTextContent('You\'re getting the hang of things.');
-        });
-    })
-
-
-    test('Togglebot handles speed "surprise"', async () => {
-        mockVariableValue('togglebot-speed', 'surprise');
-        setUpDevCycle();
-        await waitFor(() => {
-            expect(document.getElementById('togglebot-message')).toHaveTextContent("What the unicorn?");
-            expect(document.getElementById('instructions-header')).toHaveTextContent('You\'re getting the hang of things.');
+            expect(document.getElementById('instructions-header').textContent).toMatchSnapshot();
+            expect(document.getElementById('instructions-body').textContent).toMatchSnapshot();
         });
     })
 })

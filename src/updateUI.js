@@ -26,7 +26,7 @@ const updateToggleBotSection = (devcycleClient) => {
     // Display message based on spinSpeed variable
     document.getElementById("togglebot-message").innerHTML = getToggleBotMessage(spinSpeed);
 
-    // Choose togglebot image based on message based on shouldWink variable
+    // Choose togglebot image based on variables
     const togglebot = document.getElementById("togglebot");
     togglebot.src =
         spinSpeed === 'surprise' ? "./images/unicorn.svg" :
@@ -39,39 +39,45 @@ const updateToggleBotSection = (devcycleClient) => {
 }
 
 const updateInstructionsSection = (devcycleClient) => {
-    const spinSpeed = devcycleClient.variableValue('togglebot-speed', 'off');
+    const text = devcycleClient.variableValue('example-text', 'default');
 
     let header;
     let details;
-    switch (spinSpeed) {
-        case 'off':
+    switch (text) {
+        case 'step-1':
             header = "Welcome to DevCycle's example app.";
-            details = baseVariationInstructions;
+            details = stepOneInstructions;
             break;
-        case "slow":
+        case 'step-2':
             header = "Great! You've taken the first step in exploring DevCycle.";
-            details = winkVariationInstructions;
+            details = stepTwoInstructions;
             break;
-        default: // custom variation
+        case 'step-3':
             header = "You're getting the hang of things.";
-            details = customVariationInstructions;
+            details = stepThreeInstructions;
+        default:
+            header = "Welcome to DevCycle's example app.";
+            details = defaultInstructions;
+            break;
     }
 
     document.getElementById("instructions-header").innerHTML = header;
     document.getElementById("instructions-body").innerHTML = details;
 }
 
-const baseVariationInstructions = `
-    <p>
-     If you got here through the onboarding flow, just follow the instructions to change and create new Variations and see how the app reacts to new Variable values.
-    </p>
-
+const defaultInstructions = `
     <p>
         If you got to the example app on your own, follow our <a target="_blank" href="https://github.com/DevCycleHQ-Labs/example-javascript/blob/main/README.md">README</a> guide to create the Feature and Variables you need in DevCycle to control this app.
     </p>
 `;
 
-const winkVariationInstructions = `
+const stepOneInstructions = `
+    <p>
+     If you got here through the onboarding flow, just follow the instructions to change and create new Variations and see how the app reacts to new Variable values.
+    </p>
+`;
+
+const stepTwoInstructions = `
     <p>
         You've successfully toggled your very first variation. You are now serving a different value to your users and you can see how the example app has reacted to this change.
     </p>
@@ -80,7 +86,7 @@ const winkVariationInstructions = `
     </p>
 `;
 
-const customVariationInstructions = `
+const stepThreeInstructions = `
     <p>
         By creating a new Variation with new Variable values and toggling it on for all users you've already explored the fundamental concepts within DevCycle.
     </p>

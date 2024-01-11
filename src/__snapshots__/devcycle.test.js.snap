@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App content App description is updated for value "default" 1`] = `"Welcome to DevCycle's example app."`;
+
+exports[`App content App description is updated for value "default" 2`] = `
+"
+    
+        If you got to the example app on your own, follow our README guide to create the Feature and Variables you need in DevCycle to control this app.
+    
+"
+`;
+
+exports[`App content App description is updated for value "step-1" 1`] = `"Welcome to DevCycle's example app."`;
+
+exports[`App content App description is updated for value "step-1" 2`] = `
+"
+    
+     If you got here through the onboarding flow, just follow the instructions to change and create new Variations and see how the app reacts to new Variable values.
+    
+"
+`;
+
+exports[`App content App description is updated for value "step-2" 1`] = `"Great! You've taken the first step in exploring DevCycle."`;
+
+exports[`App content App description is updated for value "step-2" 2`] = `
+"
+    
+        You've successfully toggled your very first variation. You are now serving a different value to your users and you can see how the example app has reacted to this change.
+    
+    
+        Next, go ahead and create a whole new variation to see what else is possible in this app.
+    
+"
+`;
+
+exports[`App content App description is updated for value "step-3" 1`] = `"Welcome to DevCycle's example app."`;
+
+exports[`App content App description is updated for value "step-3" 2`] = `
+"
+    
+        If you got to the example app on your own, follow our README guide to create the Feature and Variables you need in DevCycle to control this app.
+    
+"
+`;
