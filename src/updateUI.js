@@ -1,7 +1,7 @@
-// Use DevCycle variables to control the UI 
-export const updateUI = (devcycleClient) => {
-    updateToggleBotSection(devcycleClient);
-    updateInstructionsSection(devcycleClient);
+// Use DevCycle variables to control the UI
+export const updateUI = (openFeatureClient, devcycleProvider) => {
+    updateToggleBotSection(openFeatureClient, devcycleProvider);
+    updateInstructionsSection(openFeatureClient);
 }
 
 const getToggleBotMessage = (spinSpeed) => {
@@ -14,14 +14,14 @@ const getToggleBotMessage = (spinSpeed) => {
     }
 }
 
-const updateToggleBotSection = (devcycleClient) => {
+const updateToggleBotSection = (openFeatureClient, devcycleProvider) => {
     // Display variation name
-    const demoFeature = devcycleClient.allFeatures()['hello-togglebot'];
+    const demoFeature = devcycleProvider.devcycleClient.allFeatures()['hello-togglebot'];
     document.getElementById("variation-name").innerHTML = `"${demoFeature?.variationName ?? 'Default'}"`;
 
     // Get variables from DevCycle
-    const shouldWink = devcycleClient.variableValue('togglebot-wink', false);
-    const spinSpeed = devcycleClient.variableValue('togglebot-speed', 'off');
+    const shouldWink = openFeatureClient.getBooleanValue('togglebot-wink', false);
+    const spinSpeed = openFeatureClient.getStringValue('togglebot-speed', 'off');
 
     // Display message based on spinSpeed variable
     document.getElementById("togglebot-message").innerHTML = getToggleBotMessage(spinSpeed);
@@ -38,8 +38,8 @@ const updateToggleBotSection = (devcycleClient) => {
     togglebot.classList.add(`spin-${spinSpeed}`);
 }
 
-const updateInstructionsSection = (devcycleClient) => {
-    const text = devcycleClient.variableValue('example-text', 'default');
+const updateInstructionsSection = (openFeatureClient) => {
+    const text = openFeatureClient.getStringValue('example-text', 'default');
 
     let header;
     let details;

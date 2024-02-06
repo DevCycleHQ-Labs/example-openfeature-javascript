@@ -1,3 +1,3 @@
-import { setUpDevCycle } from './devcycle.js';
+import { setUpOpenFeature } from './devcycle.js'
 
-setUpDevCycle();
+setUpOpenFeature();

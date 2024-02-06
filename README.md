@@ -1,6 +1,6 @@
-# DevCycle JavaScript SDK Example App
+# DevCycle OpenFeature JavaScript Web Example App
 
-An example app built using the [DevCycle JavaScript SDK](https://docs.devcycle.com/sdk/client-side-sdks/javascript/)
+An example app built using the [DevCycle OpenFeature Web Provider](https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-openfeature)
 
 ## Creating a Demo Feature
 This example app requires that your project has a feature with the expected variables, as well as some simple targeting rules. 

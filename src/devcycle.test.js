@@ -2,23 +2,35 @@ import { waitFor } from '@testing-library/dom';
 import fs from 'fs';
 import path from 'path';
 import '@testing-library/jest-dom';
-import { setUpDevCycle } from './devcycle.js';
+import { setUpOpenFeature } from './devcycle.js';
 
 process.env.DEVCYCLE_CLIENT_SDK_KEY = 'mocked-sdk-key';
 
 const mockAllFeatures = jest.fn(() => ({}))
 const mockDevCycleClient = {
-    identifyUser: jest.fn(() => Promise.resolve(true)),
-    resetUser: jest.fn(() => Promise.resolve(true)),
-    onClientInitialized: jest.fn(() => Promise.resolve(true)),
+    identifyUser: jest.fn(() => Promise.resolve({})),
+    resetUser: jest.fn(() => Promise.resolve({})),
+    onClientInitialized: jest.fn(() => Promise.resolve(mockDevCycleClient)),
+    variable: jest.fn(),
     variableValue: jest.fn(),
     subscribe: jest.fn(),
-    allFeatures: mockAllFeatures
+    allFeatures: mockAllFeatures,
+    eventEmitter: {
+        subscribe: jest.fn(),
+        unsubscribe: jest.fn(),
+        emit: jest.fn()
+    },
+    close: jest.fn()
 }
 
 const mockVariableValue = (variable, value) => {
-    mockDevCycleClient.variableValue.mockImplementation((variableKey, defaultValue) => {
-        return variable === variableKey ? value : defaultValue
+    mockDevCycleClient.variable.mockImplementation((variableKey, defaultValue) => {
+        return {
+            key: variableKey,
+            defaultValue,
+            value: variable === variableKey ? value : defaultValue,
+            isDefaulted: variable !== variableKey
+        }
     })
 }
 
@@ -35,12 +47,12 @@ describe('DevCycle client initialization', () => {
     });
 
     test('App initializes DevCycle client correctly', async () => {
-        setUpDevCycle();
+        await setUpOpenFeature();
         await waitFor(() => expect(mockDevCycleClient.onClientInitialized).toHaveBeenCalled());
     });
 
     test('App handles default variation', async () => {
-        setUpDevCycle();
+        await setUpOpenFeature();
         await waitFor(() => {
             expect(document.getElementById('variation-name')).toHaveTextContent('Default');
         });
@@ -61,7 +73,7 @@ describe('App content', () => {
         ['surprise', "What the unicorn?"],
     ])('Togglebot message is updated for speed "%s"', async (speed, expectedMessage) => {
         mockVariableValue('togglebot-speed', speed);
-        setUpDevCycle();
+        await setUpOpenFeature();
         await waitFor(() => {
             expect(document.getElementById('togglebot-message')).toHaveTextContent(expectedMessage);
         });
@@ -74,7 +86,7 @@ describe('App content', () => {
         'step-3',
     ])('App description is updated for value "%s"', async (exampleText) => {
         mockVariableValue('example-text', exampleText);
-        setUpDevCycle();
+        await setUpOpenFeature();
         await new Promise((resolve) => setTimeout(resolve, 100));
         await waitFor(() => {
             expect(document.getElementById('instructions-header').textContent).toMatchSnapshot();

@@ -1,35 +1,38 @@
-import { initializeDevCycle } from "@devcycle/js-client-sdk";
+import DevCycleProvider from '@devcycle/openfeature-web-provider'
+import { OpenFeature } from '@openfeature/web-sdk'
 import { users } from "./users";
 import { updateUI } from "./updateUI";
 
+const { DEVCYCLE_CLIENT_SDK_KEY } = process.env;
+
+let openFeatureClient;
+let devcycleProvider;
+
 // Create DevCycle client and set up event listeners
-export const setUpDevCycle = () => {
+export const setUpOpenFeature = async () => {
     if (!process.env.DEVCYCLE_CLIENT_SDK_KEY) {
         alert('Set your DEVCYCLE_CLIENT_SDK_KEY environment variable to use the DevCycle JavaScript SDK.')
     }
 
     // Initialize the DevCycle client with your SDK key and user
     const devcycleOptions = { logLevel: "debug" };
-    const devcycleClient = initializeDevCycle(
-        process.env.DEVCYCLE_CLIENT_SDK_KEY,
-        users[0], // identifying initial user as user-1
-        devcycleOptions
-    );
+    devcycleProvider = new DevCycleProvider(DEVCYCLE_CLIENT_SDK_KEY, devcycleOptions);
+    await OpenFeature.setContext(users[0]);
+    await OpenFeature.setProviderAndWait(devcycleProvider);
+    openFeatureClient = OpenFeature.getClient();
 
     // Update the app when DevCycle receives the first user config
-    devcycleClient.onClientInitialized().then(({ config }) => {
-        updateUI(devcycleClient);
-    });
+    updateUI(openFeatureClient, devcycleProvider);
 
     // Update the app when DevCycle receives realtime updates from the dashboard
-    devcycleClient.subscribe('configUpdated', () => {
-        updateUI(devcycleClient);
+    openFeatureClient.addHandler("PROVIDER_CONFIGURATION_CHANGED", () => {
+        updateUI(openFeatureClient, devcycleProvider);
     });
 };
 
-// You can use this function to change which user is identified. The new user will receive a different config, 
+// You can use this function to change which user is identified. The new user will receive a different config,
 // depending on the user properties and your feature's targeting rules
-const identifyNewUser = (devcycleClient) => {
-    devcycleClient.identifyUser(users[1]).then(() => updateUI(devcycleClient));
+const identifyNewUser = () => {
+    openFeatureClient.setContext(users[1]);
 }
 
