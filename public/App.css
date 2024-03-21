@@ -45,6 +45,10 @@
 }
 
 .togglebot-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 60%;
   padding: 1em 2em 1em 2em;
   border-radius: 0.5rem;
@@ -87,8 +91,9 @@
 }
 
 .togglebot {
-  height: 220px;
+  height: 200px;
   pointer-events: none;
+  margin: 0.5em 0;
 }
 
 .variation-details {
