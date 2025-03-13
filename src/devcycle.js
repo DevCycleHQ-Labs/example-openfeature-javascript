@@ -15,8 +15,11 @@ export const setUpOpenFeature = async () => {
     }
 
     // Initialize the DevCycle client with your SDK key and user
-    const devcycleOptions = { logLevel: "debug" };
-    devcycleProvider = new DevCycleProvider(DEVCYCLE_CLIENT_SDK_KEY, devcycleOptions);
+    devcycleProvider = new DevCycleProvider(DEVCYCLE_CLIENT_SDK_KEY, { 
+        logLevel: "debug",
+        // Controls the interval between flushing events to the DevCycle servers
+        eventFlushIntervalMS: 1000
+    });
     await OpenFeature.setContext(users[0]);
     await OpenFeature.setProviderAndWait(devcycleProvider);
     openFeatureClient = OpenFeature.getClient();
