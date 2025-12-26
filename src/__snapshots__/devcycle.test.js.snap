@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`App content App description is updated for value "default" 1`] = `"Welcome to DevCycle's example app."`;
 
